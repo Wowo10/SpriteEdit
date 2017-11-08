@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SpritEdit" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc_71" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SpritEdit" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc_71" />
+				<Compiler>
+					<Add option="-std=c++14" />
+					<Add option="-g" />
+					<Add directory="../../../../../usr/include" />
+					<Add directory="../../../../../usr/include/imgui" />
+				</Compiler>
+				<Linker>
+					<Add option="-lGL" />
+					<Add option="-lstdc++fs" />
+					<Add option="-std=c++17" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SpritEdit" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc_71" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/Settings.cpp" />
+		<Unit filename="src/Settings.hpp" />
+		<Unit filename="src/imgui-SFML.cpp" />
+		<Unit filename="src/imgui.cpp" />
+		<Unit filename="src/imgui_draw.cpp" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

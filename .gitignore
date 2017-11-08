@@ -1,0 +1,3 @@
+#blocking obj and bin files
+/obj/*
+/bin/*
