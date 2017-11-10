@@ -9,10 +9,12 @@ void Settings::SetEventVariables()
 }
 ///////////////imgui hax
 
-char Settings::s_framecount[255];
+//char Settings::s_framecount[255];
 int Settings::spritechosen;
 
-sf::Clock Settings::deltaClock;
+sf::Clock Settings::deltaclock;
+float Settings::animationtimer;
+sf::Clock Settings::animationclock;
 
 ///////////////other
 
@@ -24,33 +26,70 @@ sf::Sprite Settings::preview;
 
 int Settings::preview_width;
 int Settings::preview_height;
+float Settings::preview_scale;
+
+bool Settings::animationloop;
+
+void Settings::Animate()
+{
+    if(animationloop && animationclock.getElapsedTime().asMilliseconds() >= animationtimer)
+    {
+        animationclock.restart();
+        frame = (frame + 1)%(framescount);
+        SetFrame();
+    }
+}
+
+void Settings::TurnAnimation()
+{
+    //animationloop = !animationloop;
+}
 
 int Settings::framescount;
 int Settings::framewidth;
+int Settings::frame;
 
 void Settings::Init()
 {
     settingpath = "data/usr/settings.csv";
     imagespath = "data/images/";
     spritechosen = 5;
+    framescount = 1;
+    frame = 0;
 
     bgcolor = sf::Color(60,50,50);
+
+    animationtimer = std::stof(Settings::ReadSetting("animationtimer"));
 
     preview.setTexture(*Settings::LoadTexture("spritesheet"));
     preview.setPosition(100,100);
 
+    animationloop = false;
+
     preview_width = preview.getGlobalBounds().width;
     preview_height = preview.getGlobalBounds().height;
 
-    SetFramesCount(1);
+    SetFramesCount();
 }
 
-void Settings::SetFramesCount(int fcount)
+void Settings::SetFramesCount()
 {
-    framescount = fcount;
+    //framescount = fcount;
     framewidth = preview_width/framescount%preview_width;
+    frame = 0;
 
-    preview.setTextureRect(sf::IntRect(framewidth,0,preview_width/framescount,preview_height));
+    //preview.setTextureRect(sf::IntRect(framewidth*frame,0,preview_width/framescount,preview_height));
+    SetFrame();
+}
+
+void Settings::SetFrame()
+{
+    preview.setTextureRect(sf::IntRect(framewidth*frame,0,preview_width/framescount,preview_height));
+}
+
+void Settings::SetScale()
+{
+    preview.setScale(preview_scale,preview_scale);
 }
 ///////////////utilities
 

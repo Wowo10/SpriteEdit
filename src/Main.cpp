@@ -34,11 +34,15 @@ int main()
                 //some event action
                 Settings::keypressed = !Settings::keypressed;
             }
-
         }
 
-        ImGui::SFML::Update(window, Settings::deltaClock.restart());
+        //std::cout << Settings::animationclock.getElapsedTime().asMilliseconds()<<"\n";
+        //if( Settings::animationclock.getElapsedTime().asMilliseconds() >= 1000 )
+        //    Settings::animationclock.restart();
 
+        Settings::Animate();
+
+        ImGui::SFML::Update(window, Settings::deltaclock.restart());
 
         ImGui::Begin("Window1");
 
@@ -50,25 +54,25 @@ int main()
 
         ImGui::Combo("filename", &Settings::spritechosen, items, IM_ARRAYSIZE(items));   // Combo using proper array. You can also pass a callback to retrieve array value, no need to create/copy an array just for that.
 
-        if(ImGui::InputText("Frames", Settings::s_framecount, 255))
+        if(ImGui::InputInt("Frames", &Settings::framescount))
         {
-            Settings::SetFramesCount(atoi(Settings::s_framecount));
+            Settings::SetFramesCount();
         }
 
-        if(ImGui::Button("+"))
+        if(ImGui::SliderInt("slider int", &Settings::frame, 0, Settings::framescount-1))
         {
-            if(Settings::s_framecount != "")
-                strcpy(Settings::s_framecount, std::to_string(atoi(Settings::s_framecount)+1).c_str());
-
-            Settings::SetFramesCount(atoi(Settings::s_framecount));
+            Settings::SetFrame();
         }
 
-        if(ImGui::Button("-"))
+        if(ImGui::SliderFloat("slider float", &Settings::preview_scale, 1.0f, 3.0f))
         {
-            if(Settings::s_framecount != "")
-                strcpy(Settings::s_framecount, std::to_string(atoi(Settings::s_framecount)-1).c_str());
+            Settings::SetScale();
+        }
 
-            Settings::SetFramesCount(atoi(Settings::s_framecount));
+        if(ImGui::Checkbox("loop animation",&Settings::animationloop))
+        {
+            std::cout << "kek\n";
+            Settings::TurnAnimation();
         }
 
         ImGui::End();

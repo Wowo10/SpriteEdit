@@ -26,10 +26,13 @@ public:
     static void SetEventVariables();
 
     ///////////////////variables for Imgui hax
-    static char s_framecount[255];
+    //static char s_framecount[255];
+
     static int spritechosen;
 
-    static sf::Clock deltaClock;
+    static sf::Clock deltaclock;
+    static float animationtimer;
+    static sf::Clock animationclock;
 
     ///////////////////other
 
@@ -41,13 +44,23 @@ public:
 
     static int preview_width;
     static int preview_height;
+    static float preview_scale;
+
+    static bool animationloop;
+    static void Animate();
+    static void TurnAnimation();
 
     static int framescount;
     static int framewidth;
+    static int frame; //actual frame
 
     static void Init();
 
-    static void SetFramesCount(int fcount);
+    static void SetFramesCount();
+
+    static void SetFrame();
+
+    static void SetScale();
 
     ///////////////////utilities
 

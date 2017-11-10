@@ -609,7 +609,7 @@
 	<features.h>
 	<string.h>
 
-1510181714 source:/home/wowo/Projects/Cpp/SpritEdit/src/Main.cpp
+1510309184 source:/home/wowo/Projects/Cpp/SpritEdit/src/Main.cpp
 	"Settings.hpp"
 
 1440432066 /usr/include/SFML/Graphics.hpp
@@ -804,7 +804,7 @@
 	<string>
 	<vector>
 
-1510181467 /home/wowo/Projects/Cpp/SpritEdit/src/Settings.hpp
+1510308737 /home/wowo/Projects/Cpp/SpritEdit/src/Settings.hpp
 	"imgui.h"
 	"imgui-SFML.h"
 	<iostream>
@@ -815,7 +815,7 @@
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 
-1510181648 source:/home/wowo/Projects/Cpp/SpritEdit/src/Settings.cpp
+1510309468 source:/home/wowo/Projects/Cpp/SpritEdit/src/Settings.cpp
 	"Settings.hpp"
 
 1497645219 /usr/include/unistd.h
@@ -844,70 +844,4 @@
 	<bits/stat.h>
 
 1497645219 /usr/include/bits/stat.h
-
-1510069888 source:/home/wowo/Repositories/SpritEdit/src/imgui-SFML.cpp
-	"imgui-SFML.h"
-	<imgui.h>
-	<SFML/OpenGL.hpp>
-	<SFML/Graphics/Color.hpp>
-	<SFML/Graphics/RenderTarget.hpp>
-	<SFML/Graphics/RenderWindow.hpp>
-	<SFML/Graphics/Sprite.hpp>
-	<SFML/Graphics/Texture.hpp>
-	<SFML/Window/Event.hpp>
-	<SFML/Window/Window.hpp>
-	<cmath>
-	<cstddef>
-	<cassert>
-	<SFML/Window/Touch.hpp>
-	<jni.h>
-	<android/native_activity.h>
-	<SFML/System/NativeActivity.hpp>
-
-1504252736 /home/wowo/Repositories/SpritEdit/src/imgui-SFML.h
-	<SFML/System/Vector2.hpp>
-	<SFML/Graphics/Rect.hpp>
-	<SFML/Graphics/Color.hpp>
-	<SFML/System/Time.hpp>
-
-1510069878 source:/home/wowo/Repositories/SpritEdit/src/imgui.cpp
-	"imgui.h"
-	"imgui_internal.h"
-	<ctype.h>
-	<stdlib.h>
-	<stdio.h>
-	<limits.h>
-	<stddef.h>
-	<stdint.h>
-	"stb_textedit.h"
-	<windows.h>
-	<imm.h>
-	"imgui_user.inl"
-
-1509975557 source:/home/wowo/Repositories/SpritEdit/src/imgui_draw.cpp
-	"imgui.h"
-	"imgui_internal.h"
-	<stdio.h>
-	<malloc.h>
-	<alloca.h>
-	<stdlib.h>
-	"stb_rect_pack.h"
-	"stb_truetype.h"
-
-1510181714 source:/home/wowo/Repositories/SpritEdit/src/Main.cpp
-	"Settings.hpp"
-
-1510181467 /home/wowo/Repositories/SpritEdit/src/Settings.hpp
-	"imgui.h"
-	"imgui-SFML.h"
-	<iostream>
-	<fstream>
-	<sys/stat.h>
-	<experimental/filesystem>
-	<SFML/Graphics.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-
-1510182080 source:/home/wowo/Repositories/SpritEdit/src/Settings.cpp
-	"Settings.hpp"
 
