@@ -183,9 +183,16 @@ sf::Texture* Settings::LoadTexture(const std::string& name)
 
     sf::Texture* temp = new sf::Texture();
 
-    if(FileExists(imagespath+name+".png"))
+    std::string mypath = imagespath+name;
+
+    if(mypath.substr( mypath.length() - 4 ) != ".png")
+        mypath += ".png";
+
+    if(FileExists(mypath))
     {
-        temp->loadFromFile(imagespath+name+".png");
+        temp->loadFromFile(mypath);
+
+        loadedtextures[name] = temp;
     }
 
     return temp;

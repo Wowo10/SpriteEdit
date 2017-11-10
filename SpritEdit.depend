@@ -845,3 +845,69 @@
 
 1497645219 /usr/include/bits/stat.h
 
+1510069888 source:/home/wowo/Repositories/SpriteEdit/src/imgui-SFML.cpp
+	"imgui-SFML.h"
+	<imgui.h>
+	<SFML/OpenGL.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/Graphics/RenderWindow.hpp>
+	<SFML/Graphics/Sprite.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Window/Event.hpp>
+	<SFML/Window/Window.hpp>
+	<cmath>
+	<cstddef>
+	<cassert>
+	<SFML/Window/Touch.hpp>
+	<jni.h>
+	<android/native_activity.h>
+	<SFML/System/NativeActivity.hpp>
+
+1504252736 /home/wowo/Repositories/SpriteEdit/src/imgui-SFML.h
+	<SFML/System/Vector2.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/System/Time.hpp>
+
+1510069878 source:/home/wowo/Repositories/SpriteEdit/src/imgui.cpp
+	"imgui.h"
+	"imgui_internal.h"
+	<ctype.h>
+	<stdlib.h>
+	<stdio.h>
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+	"stb_textedit.h"
+	<windows.h>
+	<imm.h>
+	"imgui_user.inl"
+
+1509975557 source:/home/wowo/Repositories/SpriteEdit/src/imgui_draw.cpp
+	"imgui.h"
+	"imgui_internal.h"
+	<stdio.h>
+	<malloc.h>
+	<alloca.h>
+	<stdlib.h>
+	"stb_rect_pack.h"
+	"stb_truetype.h"
+
+1510313354 source:/home/wowo/Repositories/SpriteEdit/src/Settings.cpp
+	"Settings.hpp"
+
+1510311641 /home/wowo/Repositories/SpriteEdit/src/Settings.hpp
+	"imgui.h"
+	"imgui-SFML.h"
+	<iostream>
+	<fstream>
+	<sys/stat.h>
+	<experimental/filesystem>
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+
+1510314373 source:/home/wowo/Repositories/SpriteEdit/src/Main.cpp
+	"Settings.hpp"
+

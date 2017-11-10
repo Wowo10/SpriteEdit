@@ -52,7 +52,18 @@ int main()
             items[i] = imagefiles[i].c_str();
         }
 
-        ImGui::Combo("filename", &Settings::spritechosen, items, IM_ARRAYSIZE(items));   // Combo using proper array. You can also pass a callback to retrieve array value, no need to create/copy an array just for that.
+        if(ImGui::Combo("filename", &Settings::spritechosen, items, IM_ARRAYSIZE(items)))
+        {
+            //will promote to function soon
+            sf::Vector2f temp = Settings::preview.getPosition();
+            Settings::preview = sf::Sprite(*Settings::LoadTexture(items[Settings::spritechosen]));
+
+            Settings::preview.setPosition(temp);
+
+            Settings::preview_width = Settings::preview.getLocalBounds().width;
+            Settings::preview_height = Settings::preview.getLocalBounds().height;
+            Settings::framewidth = Settings::preview_width/Settings::framescount%Settings::preview_width;
+        }
 
         if(ImGui::InputInt("Frames", &Settings::framescount))
         {
@@ -71,7 +82,6 @@ int main()
 
         if(ImGui::Checkbox("loop animation",&Settings::animationloop))
         {
-            std::cout << "kek\n";
             Settings::TurnAnimation();
         }
 
