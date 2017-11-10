@@ -31,7 +31,7 @@ public:
     static int spritechosen;
 
     static sf::Clock deltaclock;
-    static float animationtimer;
+    static int animationtimer;
     static sf::Clock animationclock;
 
     ///////////////////other

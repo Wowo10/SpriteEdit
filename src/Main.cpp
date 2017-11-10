@@ -36,10 +36,6 @@ int main()
             }
         }
 
-        //std::cout << Settings::animationclock.getElapsedTime().asMilliseconds()<<"\n";
-        //if( Settings::animationclock.getElapsedTime().asMilliseconds() >= 1000 )
-        //    Settings::animationclock.restart();
-
         Settings::Animate();
 
         ImGui::SFML::Update(window, Settings::deltaclock.restart());
@@ -84,6 +80,9 @@ int main()
         {
             Settings::TurnAnimation();
         }
+
+        if(ImGui::InputInt("Frametimer",&Settings::animationtimer))
+        { }
 
         ImGui::End();
 

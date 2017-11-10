@@ -13,7 +13,7 @@ void Settings::SetEventVariables()
 int Settings::spritechosen;
 
 sf::Clock Settings::deltaclock;
-float Settings::animationtimer;
+int Settings::animationtimer;
 sf::Clock Settings::animationclock;
 
 ///////////////other
