@@ -30,9 +30,14 @@
 				<Option compiler="gcc_71" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++14" />
+					<Add directory="../../../../../usr/include" />
+					<Add directory="../../../../../usr/include/imgui" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
+					<Add option="-lGL" />
+					<Add option="-lstdc++fs" />
+					<Add option="-std=c++17" />
 				</Linker>
 			</Target>
 		</Build>
