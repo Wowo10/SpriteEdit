@@ -72,6 +72,21 @@ void Settings::Init()
     SetFramesCount();
 }
 
+void Settings::SetPreview(const std::string& filename)
+{
+    Settings::frame = 0;
+    sf::Vector2f tempposition = Settings::preview.getPosition();
+    sf::Vector2f tempscale = Settings::preview.getScale();
+    Settings::preview = sf::Sprite(*Settings::LoadTexture(filename));
+
+    Settings::preview.setPosition(tempposition);
+    Settings::preview.setScale(tempscale);
+
+    Settings::preview_width = Settings::preview.getLocalBounds().width;
+    Settings::preview_height = Settings::preview.getLocalBounds().height;
+    Settings::framewidth = Settings::preview_width/Settings::framescount%Settings::preview_width;
+}
+
 void Settings::SetFramesCount()
 {
     //framescount = fcount;

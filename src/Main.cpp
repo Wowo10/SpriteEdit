@@ -13,7 +13,9 @@ int main()
     window.resetGLStates();
 
     std::vector<std::string> imagefiles;
-    Settings::ListDirectory(Settings::imagespath,imagefiles);
+    Settings::ListDirectory(Settings::imagespath, imagefiles);
+
+    std::sort(imagefiles.begin(), imagefiles.end());
 
     while(window.isOpen())
     {
@@ -50,19 +52,14 @@ int main()
 
         if(ImGui::Combo("filename", &Settings::spritechosen, items, IM_ARRAYSIZE(items)))
         {
-            //will promote to function soon
-            sf::Vector2f temp = Settings::preview.getPosition();
-            Settings::preview = sf::Sprite(*Settings::LoadTexture(items[Settings::spritechosen]));
-
-            Settings::preview.setPosition(temp);
-
-            Settings::preview_width = Settings::preview.getLocalBounds().width;
-            Settings::preview_height = Settings::preview.getLocalBounds().height;
-            Settings::framewidth = Settings::preview_width/Settings::framescount%Settings::preview_width;
+            Settings::SetPreview(items[Settings::spritechosen]);
         }
 
         if(ImGui::InputInt("Frames", &Settings::framescount))
         {
+            if(Settings::framescount == 0)
+                Settings::framescount++;
+
             Settings::SetFramesCount();
         }
 
@@ -82,7 +79,7 @@ int main()
         }
 
         if(ImGui::InputInt("Frametimer",&Settings::animationtimer))
-        { }
+        {  }
 
         ImGui::End();
 

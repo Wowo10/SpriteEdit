@@ -56,6 +56,8 @@ public:
 
     static void Init();
 
+    static void SetPreview(const std::string& filename);
+
     static void SetFramesCount();
 
     static void SetFrame();
