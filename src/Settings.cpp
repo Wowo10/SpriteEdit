@@ -9,7 +9,6 @@ void Settings::SetEventVariables()
 }
 ///////////////imgui hax
 
-//char Settings::s_framecount[255];
 int Settings::spritechosen;
 
 sf::Clock Settings::deltaclock;
@@ -23,6 +22,9 @@ std::string Settings::imagespath;
 sf::Color Settings::bgcolor;
 
 sf::Sprite Settings::preview;
+
+std::string Settings::currentfolder;
+std::vector<std::string> Settings::imagesinfolder;
 
 int Settings::preview_width;
 int Settings::preview_height;
@@ -45,6 +47,8 @@ void Settings::TurnAnimation()
     //animationloop = !animationloop;
 }
 
+bool Settings::folder;
+
 int Settings::framescount;
 int Settings::framewidth;
 int Settings::frame;
@@ -66,40 +70,76 @@ void Settings::Init()
 
     animationloop = false;
 
+    folder = false;
+    currentfolder="";
+
     preview_width = preview.getGlobalBounds().width;
     preview_height = preview.getGlobalBounds().height;
+    preview_scale = 1.0f;
 
     SetFramesCount();
 }
 
 void Settings::SetPreview(const std::string& filename)
 {
-    Settings::frame = 0;
-    sf::Vector2f tempposition = Settings::preview.getPosition();
-    sf::Vector2f tempscale = Settings::preview.getScale();
-    Settings::preview = sf::Sprite(*Settings::LoadTexture(filename));
+    folder = filename.substr( filename.length() - 4 ) != ".png";
 
-    Settings::preview.setPosition(tempposition);
-    Settings::preview.setScale(tempscale);
+    if(folder)
+    {
+        currentfolder = filename;
 
-    Settings::preview_width = Settings::preview.getLocalBounds().width;
-    Settings::preview_height = Settings::preview.getLocalBounds().height;
-    Settings::framewidth = Settings::preview_width/Settings::framescount%Settings::preview_width;
+        imagesinfolder.clear();
+
+        ListDirectory(imagespath+"/"+filename, imagesinfolder);
+
+        std::sort(imagesinfolder.begin(), imagesinfolder.end());
+
+        framescount = imagesinfolder.size();
+    }
+    else
+    {
+        sf::Vector2f tempposition = preview.getPosition();
+        sf::Vector2f tempscale = preview.getScale();
+        preview = sf::Sprite(*LoadTexture(filename));
+
+        preview.setPosition(tempposition);
+        preview.setScale(tempscale);
+
+        preview_width = preview.getLocalBounds().width;
+        preview_height = preview.getLocalBounds().height;
+    }
+    SetFramesCount();
 }
 
 void Settings::SetFramesCount()
 {
-    //framescount = fcount;
-    framewidth = preview_width/framescount%preview_width;
     frame = 0;
 
-    //preview.setTextureRect(sf::IntRect(framewidth*frame,0,preview_width/framescount,preview_height));
+    if(folder)
+    {
+
+    }
+    else
+    {
+        framewidth = (preview_width/framescount)%preview_width;
+    }
     SetFrame();
 }
 
 void Settings::SetFrame()
 {
-    preview.setTextureRect(sf::IntRect(framewidth*frame,0,preview_width/framescount,preview_height));
+    if(folder)
+    {
+        sf::Vector2f tempposition = preview.getPosition();
+        sf::Vector2f tempscale = preview.getScale();
+
+        preview = sf::Sprite(*LoadTexture(currentfolder+"/"+imagesinfolder[frame]));
+
+        preview.setPosition(tempposition);
+        preview.setScale(tempscale);
+    }
+    else
+        preview.setTextureRect(sf::IntRect(framewidth*frame,0,preview_width/framescount,preview_height));
 }
 
 void Settings::SetScale()
@@ -110,14 +150,13 @@ void Settings::SetScale()
 
 bool Settings::FileExists(const std::string& path) //Hail StackOverflow
 {
-    // return ( access( (imagespath+path).c_str(), F_OK ) != 1 );
     struct stat buffer;
     return (stat (path.c_str(), &buffer) == 0);
 }
 
 void Settings::ListDirectory(const std::string& path, std::vector<std::string>& namelist)
 {
-    for(auto& p : fs::directory_iterator("data/images"))
+    for(auto& p : fs::directory_iterator(path))
     {
         std::ostringstream oss;
         oss << p;

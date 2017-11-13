@@ -26,7 +26,6 @@ public:
     static void SetEventVariables();
 
     ///////////////////variables for Imgui hax
-    //static char s_framecount[255];
 
     static int spritechosen;
 
@@ -42,6 +41,9 @@ public:
 
     static sf::Sprite preview;
 
+    static std::string currentfolder;
+    static std::vector<std::string> imagesinfolder; //while folder == true
+
     static int preview_width;
     static int preview_height;
     static float preview_scale;
@@ -49,6 +51,8 @@ public:
     static bool animationloop;
     static void Animate();
     static void TurnAnimation();
+
+    static bool folder; //false for file
 
     static int framescount;
     static int framewidth;

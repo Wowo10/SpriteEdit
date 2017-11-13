@@ -17,6 +17,12 @@ int main()
 
     std::sort(imagefiles.begin(), imagefiles.end());
 
+    const char* items[imagefiles.size()];
+    for(int i = 0; i < imagefiles.size(); i++)
+    {
+        items[i] = imagefiles[i].c_str();
+    }
+
     while(window.isOpen())
     {
         Settings::SetEventVariables();
@@ -44,18 +50,12 @@ int main()
 
         ImGui::Begin("Window1");
 
-        const char* items[imagefiles.size()];
-        for(int i = 0; i < imagefiles.size(); i++)
-        {
-            items[i] = imagefiles[i].c_str();
-        }
-
-        if(ImGui::Combo("filename", &Settings::spritechosen, items, IM_ARRAYSIZE(items)))
+        if(ImGui::Combo("Filename:", &Settings::spritechosen, items, IM_ARRAYSIZE(items)))
         {
             Settings::SetPreview(items[Settings::spritechosen]);
         }
 
-        if(ImGui::InputInt("Frames", &Settings::framescount))
+        if(!Settings::folder && ImGui::InputInt("Frames", &Settings::framescount))
         {
             if(Settings::framescount == 0)
                 Settings::framescount++;
@@ -63,17 +63,17 @@ int main()
             Settings::SetFramesCount();
         }
 
-        if(ImGui::SliderInt("slider int", &Settings::frame, 0, Settings::framescount-1))
+        if(ImGui::SliderInt("Current frame", &Settings::frame, 0, Settings::framescount-1))
         {
             Settings::SetFrame();
         }
 
-        if(ImGui::SliderFloat("slider float", &Settings::preview_scale, 1.0f, 3.0f))
+        if(ImGui::SliderFloat("Scale", &Settings::preview_scale, 0.5f, 3.0f))
         {
             Settings::SetScale();
         }
 
-        if(ImGui::Checkbox("loop animation",&Settings::animationloop))
+        if(ImGui::Checkbox("Loop animation",&Settings::animationloop))
         {
             Settings::TurnAnimation();
         }
