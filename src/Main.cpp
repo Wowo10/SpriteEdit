@@ -17,11 +17,34 @@ int main()
 
     std::sort(imagefiles.begin(), imagefiles.end());
 
-    const char* items[imagefiles.size()];
+    const char* files[imagefiles.size()];
     for(int i = 0; i < imagefiles.size(); i++)
     {
-        items[i] = imagefiles[i].c_str();
+        files[i] = imagefiles[i].c_str();
     }
+
+    std::vector<std::string> itemfiles;
+    Settings::ListDirectory(Settings::itemspath, itemfiles);
+
+    std::sort(itemfiles.begin(), itemfiles.end());
+
+    std::vector<sf::Sprite*> itemsprites;
+
+    const char* items[itemfiles.size()];
+    for(int i = 0; i < itemfiles.size(); i++)
+    {
+        items[i] = itemfiles[i].c_str();
+    }
+
+    /* Borders work!
+    sf::RectangleShape rs = sf::RectangleShape(sf::Vector2f(100, 50));
+    rs.setPosition(300,100);
+
+    rs.setFillColor(sf::Color(0,0,0,0));
+
+    rs.setOutlineColor(sf::Color(0,0,0));
+    rs.setOutlineThickness(5);*/
+
 
     while(window.isOpen())
     {
@@ -37,9 +60,16 @@ int main()
                 window.close();
             }
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::P) && Settings::keypressed)
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::P) && !Settings::keypressed)
             {
-                //some event action
+                //anything to debug
+                Settings::keypressed = !Settings::keypressed;
+            }
+
+            //F1 to clear items
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && !Settings::keypressed)
+            {
+                itemsprites.clear();
                 Settings::keypressed = !Settings::keypressed;
             }
         }
@@ -50,9 +80,9 @@ int main()
 
         ImGui::Begin("Window1");
 
-        if(ImGui::Combo("Filename:", &Settings::spritechosen, items, IM_ARRAYSIZE(items)))
+        if(ImGui::Combo("Filename", &Settings::spritechosen, files, IM_ARRAYSIZE(files)))
         {
-            Settings::SetPreview(items[Settings::spritechosen]);
+            Settings::SetPreview(files[Settings::spritechosen]);
         }
 
         if(!Settings::folder && ImGui::InputInt("Frames", &Settings::framescount))
@@ -81,24 +111,37 @@ int main()
         if(ImGui::InputInt("Frametimer",&Settings::animationtimer))
         {  }
 
+        if(ImGui::Combo("Add Item", &Settings::itemchosen, items, IM_ARRAYSIZE(items)))
+        {
+
+        }
+
+        if(ImGui::Button("Confirm"))
+        {
+            sf::Sprite* temp = new sf::Sprite(*Settings::LoadTexture(items[Settings::itemchosen]));
+            temp->setPosition(100,100);
+
+            itemsprites.push_back(temp);
+        }
+
         ImGui::End();
 
         window.clear(Settings::bgcolor);
 
         window.draw(Settings::preview);
 
+        for(auto& it : itemsprites)
+        {
+            window.draw(*it);
+        }
+
+        //window.draw(rs);
+
         ImGui::SFML::Render(window);
 
         window.display();
 
     }
-
-    /* foreachloop
-    for(auto& setting : Settings::readsettings)
-    {
-        std::cout << setting.first << " " << setting.second <<"\n";
-    }*/
-
 
     ImGui::SFML::Shutdown();
 

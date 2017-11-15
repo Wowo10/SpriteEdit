@@ -28,6 +28,7 @@ public:
     ///////////////////variables for Imgui hax
 
     static int spritechosen;
+    static int itemchosen;
     static float minscale, maxscale;
 
     static sf::Clock deltaclock;
@@ -38,6 +39,8 @@ public:
 
     static std::string settingpath;
     static std::string imagespath;
+    static std::string itemspath;
+
     static sf::Color bgcolor;
 
     static sf::Sprite preview;

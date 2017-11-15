@@ -10,6 +10,7 @@ void Settings::SetEventVariables()
 ///////////////imgui hax
 
 int Settings::spritechosen;
+int Settings::itemchosen;
 float Settings::minscale, Settings::maxscale;
 
 sf::Clock Settings::deltaclock;
@@ -20,6 +21,7 @@ sf::Clock Settings::animationclock;
 
 std::string Settings::settingpath;
 std::string Settings::imagespath;
+std::string Settings::itemspath;
 sf::Color Settings::bgcolor;
 
 sf::Sprite Settings::preview;
@@ -58,18 +60,19 @@ void Settings::Init()
 {
     settingpath = "data/usr/settings.csv";
     imagespath = "data/images/";
-    spritechosen = 5;
+    itemspath = "data/items/";
+    spritechosen = 0;
+    itemchosen = 0;
+
     minscale = std::stof(ReadSetting("minscale"));
     maxscale = std::stof(ReadSetting("maxscale"));
 
     framescount = 1;
     frame = 0;
 
-    bgcolor = sf::Color(
-                        std::stoi(ReadSetting("bgred")),
+    bgcolor = sf::Color(std::stoi(ReadSetting("bgred")),
                         std::stoi(ReadSetting("bgblue")),
                         std::stoi(ReadSetting("bggreen")));
-
 
     animationtimer = std::stof(Settings::ReadSetting("animationtimer"));
 
@@ -95,11 +98,9 @@ void Settings::SetPreview(const std::string& filename)
     if(folder)
     {
         currentfolder = filename;
-
         imagesinfolder.clear();
 
         ListDirectory(imagespath+"/"+filename, imagesinfolder);
-
         std::sort(imagesinfolder.begin(), imagesinfolder.end());
 
         framescount = imagesinfolder.size();
@@ -246,7 +247,6 @@ sf::Texture* Settings::LoadTexture(const std::string& name)
     sf::Texture* temp = new sf::Texture();
 
     std::string mypath = imagespath+name;
-
     if(mypath.substr( mypath.length() - 4 ) != ".png")
         mypath += ".png";
 
@@ -255,6 +255,23 @@ sf::Texture* Settings::LoadTexture(const std::string& name)
         temp->loadFromFile(mypath);
 
         loadedtextures[name] = temp;
+
+        return temp;
+    }
+
+    mypath = itemspath+name;
+    if(mypath.substr( mypath.length() - 4 ) != ".png")
+        mypath += ".png";
+
+    if(FileExists(mypath))
+    {
+        temp->loadFromFile(mypath);
+
+        loadedtextures[name] = temp;
+    }
+    else
+    {
+        std::cout << "Texture does not exist: " << name << " " << mypath << "\n";
     }
 
     return temp;
