@@ -10,6 +10,7 @@ void Settings::SetEventVariables()
 ///////////////imgui hax
 
 int Settings::spritechosen;
+float Settings::minscale, Settings::maxscale;
 
 sf::Clock Settings::deltaclock;
 int Settings::animationtimer;
@@ -58,10 +59,17 @@ void Settings::Init()
     settingpath = "data/usr/settings.csv";
     imagespath = "data/images/";
     spritechosen = 5;
+    minscale = std::stof(ReadSetting("minscale"));
+    maxscale = std::stof(ReadSetting("maxscale"));
+
     framescount = 1;
     frame = 0;
 
-    bgcolor = sf::Color(60,50,50);
+    bgcolor = sf::Color(
+                        std::stoi(ReadSetting("bgred")),
+                        std::stoi(ReadSetting("bgblue")),
+                        std::stoi(ReadSetting("bggreen")));
+
 
     animationtimer = std::stof(Settings::ReadSetting("animationtimer"));
 

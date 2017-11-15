@@ -894,10 +894,10 @@
 	"stb_rect_pack.h"
 	"stb_truetype.h"
 
-1510604298 source:/home/wowo/Repositories/SpriteEdit/src/Settings.cpp
+1510739095 source:/home/wowo/Repositories/SpriteEdit/src/Settings.cpp
 	"Settings.hpp"
 
-1510601416 /home/wowo/Repositories/SpriteEdit/src/Settings.hpp
+1510738142 /home/wowo/Repositories/SpriteEdit/src/Settings.hpp
 	"imgui.h"
 	"imgui-SFML.h"
 	<iostream>

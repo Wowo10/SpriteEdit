@@ -28,6 +28,7 @@ public:
     ///////////////////variables for Imgui hax
 
     static int spritechosen;
+    static float minscale, maxscale;
 
     static sf::Clock deltaclock;
     static int animationtimer;

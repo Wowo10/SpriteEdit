@@ -68,7 +68,7 @@ int main()
             Settings::SetFrame();
         }
 
-        if(ImGui::SliderFloat("Scale", &Settings::preview_scale, 0.5f, 3.0f))
+        if(ImGui::SliderFloat("Scale", &Settings::preview_scale, Settings::minscale, Settings::maxscale))
         {
             Settings::SetScale();
         }
